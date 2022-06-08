@@ -6,31 +6,37 @@ const markdown = require('./utils/generateMarkdown');
 // TODO: Create an array of questions for user input
 const questions = [
     {
+        name: 'fileName',
+        type: 'input',
+        message: 'Enter a file name for your markdown document.'
+    },
+
+    {
         name: 'title',
         type: 'input',
         message: 'What is the title of your project?'
     },
 
     {
-        name: 'description-motivation',
+        name: 'descriptionMotivation',
         type: 'input',
         message: 'What was your motivation behind your project?'
     },
 
     {
-        name: 'description-build',
+        name: 'descriptionBuild',
         type: 'input',
         message: 'Why did you build this project?'
     },
 
     {
-        name: 'description-problem',
+        name: 'descriptionProblem',
         type: 'input',
         message: 'What problem does your project solve?'
     },
 
     {
-        name: 'description-learn',
+        name: 'descriptionLearn',
         type: 'input',
         message: 'What did you learn from your project?'
     },
@@ -54,7 +60,7 @@ const questions = [
     },
 
     {
-        name: 'license-list',
+        name: 'licenseList',
         type: 'list',
         message: 'Which license would you like your project to be covered under?',
         choices: [
@@ -63,7 +69,22 @@ const questions = [
             'GNU GPLv3',
             'MIT',
             'ISC',            
-        ]
+        ],
+        default: 'MIT',
+    },
+
+    {
+        name: 'licenseName',
+        type: 'input',
+        message: 'What is your name?',
+        when: (answers) => answers.licenseList === 'MIT' || answers.licenseList === 'ISC'
+    },
+
+    {
+        name: 'licenseYear',
+        type: 'input',
+        message: 'What is the current year?',
+        when: (answers) => answers.licenseList === 'MIT' || answers.licenseList === 'ISC'
     },
 
     {
@@ -79,13 +100,13 @@ const questions = [
     },
 
     {
-        name: 'questions-username',
+        name: 'questionsUsername',
         type: 'input',
         message: 'What is your GitHub username?'
     },
 
     {
-        name: 'questions-email',
+        name: 'questionsEmail',
         type: 'input',
         message: 'What is your email address?'
     },
@@ -93,10 +114,33 @@ const questions = [
 ];
 
 // TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+function writeToFile(fileName, data) {
+
+    fs.writeFile(fileName, data, (err) =>
+        err ? console.error(err) : console.log('File successfully created!'));
+
+}
 
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+
+    console.log('Hello. Welcome to this markdown generator application. You will be presented with a series of questions regarding your project. Once you have answered all of them, a markdown document will be generated for you in the generated-markdowns folder.');
+
+    inquirer
+        .prompt(questions)
+        .then(function (answers) {
+
+            console.log(answers);
+
+            const fileName = `./generated-markdowns/${answers.fileName}.md`;
+            const data = markdown.generateMarkdown(answers);
+
+            console.log(data);
+
+            writeToFile(fileName, data);
+        })
+
+}
 
 // Function call to initialize app
 init();

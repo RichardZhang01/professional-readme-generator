@@ -95,9 +95,9 @@ function generateMarkdown(data) {
 1. [Installation](#installation)
 2. [Usage](#usage)
 3. [License](#license)
-4. [Contribution](#contribution)
+4. [How to Contribute](#how-to-contribute)
 5. [Tests](#tests)
-6. [Questioons](#questions)
+6. [Questions](#questions)
 
 ## Installation
 
@@ -107,7 +107,7 @@ npm install
 
 ## License
 
-## Contributing
+## <a id="how-to-contribute"></a>How to Contribute
 
 ## Tests
 
