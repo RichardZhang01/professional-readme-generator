@@ -55,11 +55,14 @@ const questions = [
 
     {
         name: 'license-list',
-        type: 'input',
+        type: 'list',
         message: 'Which license would you like your project to be covered under?',
         choices: [
-            "MIT",
-
+            'Apache 2.0',
+            'GNU GPLv2',
+            'GNU GPLv3',
+            'MIT',
+            'ISC',            
         ]
     },
 

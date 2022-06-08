@@ -101,6 +101,8 @@ function generateMarkdown(data) {
 
 ## Installation
 
+npm install
+
 ## Usage
 
 ## License
