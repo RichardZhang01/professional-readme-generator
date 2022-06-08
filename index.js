@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-const markdown = require('./utils/generateMarkdown');
+const generateMarkdown = require('./utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
 const questions = [
@@ -54,12 +54,6 @@ const questions = [
     },
 
     {
-        name: 'installation',
-        type: 'input',
-        message: 'What are the steps required to install your project?'
-    },
-
-    {
         name: 'licenseList',
         type: 'list',
         message: 'Which license would you like your project to be covered under?',
@@ -68,7 +62,8 @@ const questions = [
             'GNU GPLv2',
             'GNU GPLv3',
             'MIT',
-            'ISC',            
+            'ISC',
+            'No License'            
         ],
         default: 'MIT',
     },
@@ -76,15 +71,13 @@ const questions = [
     {
         name: 'licenseName',
         type: 'input',
-        message: 'What is your name?',
-        when: (answers) => answers.licenseList === 'MIT' || answers.licenseList === 'ISC'
+        message: 'What is the name of the copyright holder (will appear on the license)?',
     },
 
     {
         name: 'licenseYear',
         type: 'input',
-        message: 'What is the current year?',
-        when: (answers) => answers.licenseList === 'MIT' || answers.licenseList === 'ISC'
+        message: 'What is the current year (will appear on the license)?',
     },
 
     {
@@ -117,25 +110,21 @@ const questions = [
 function writeToFile(fileName, data) {
 
     fs.writeFile(fileName, data, (err) =>
-        err ? console.error(err) : console.log('File successfully created!'));
+        err ? console.error(err) : console.log('\x1b[32mFile successfully created!\x1b[0m'));
 
 }
 
 // TODO: Create a function to initialize app
 function init() {
 
-    console.log('Hello. Welcome to this markdown generator application. You will be presented with a series of questions regarding your project. Once you have answered all of them, a markdown document will be generated for you in the generated-markdowns folder.');
+    console.log('\x1b[32mHello. Welcome to this markdown generator application. You will be presented with a series of questions regarding your project. Once you have answered all of them, a markdown document will be generated for you in the generated-markdowns folder.\x1b[0m');
 
     inquirer
         .prompt(questions)
         .then(function (answers) {
 
-            console.log(answers);
-
-            const fileName = `./generated-markdowns/${answers.fileName}.md`;
-            const data = markdown.generateMarkdown(answers);
-
-            console.log(data);
+            const fileName = `./generated-markdowns/${answers.fileName.replace('.md', '')}.md`;
+            const data = generateMarkdown(answers);
 
             writeToFile(fileName, data);
         })
