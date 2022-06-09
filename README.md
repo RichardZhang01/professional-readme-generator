@@ -43,6 +43,8 @@ Answer the questions, and once you're done, a markdown file will be generated in
 
 The full video demonstration can be found [here](https://drive.google.com/file/d/1rkNT_9gIpvZyJByfjNF2xFbGEpJQliMV/view)
 
+![Screenshot of the console](./assets/images/screenshot.png)
+
 ## <a id="license"></a>License
 
 This application is covered under the [MIT](https://opensource.org/licenses/MIT) license
