@@ -141,9 +141,11 @@ function generateMarkdown(data) {
   return `# ${data.title}
 
 ## Badges
+
 ${renderLicenseBadge(data.licenseList)}
 
 ## Description
+
 - ${data.descriptionMotivation}
 - ${data.descriptionBuild}
 - ${data.descriptionProblem}
@@ -159,22 +161,28 @@ ${renderLicenseBadge(data.licenseList)}
 6. [Questions?](#questions)
 
 ## <a id="installation"></a>Installation
+
 ${data.installation}
 
 ## <a id="usage"></a>Usage
+
 ${data.usage}
 
 ## <a id="license"></a>License
+
 ${data.licenseList !== 'No License' ? `This application is covered under the ${renderLicenseLink(data.licenseList)} license` : ''}
 ${renderLicenseSection(data.licenseList, data.licenseName, data.licenseYear)}
 
 ## <a id="how-to-contribute"></a>How to Contribute
+
 ${data.contribution}
 
 ## <a id="tests"></a>Tests
+
 ${data.test}
 
 ## <a id="questions"></a>Questions?
+
 Have any questions? Reach me at:
 - GitHub: https://github.com/${data.questionsUsername}
 - Email: ${data.questionsEmail}
